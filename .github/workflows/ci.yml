@@ -36,7 +36,7 @@ jobs:
           cat rapport_ci.txt
 
       - name: Upload rapport en artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3
         with:
           name: rapport-logs
           path: rapport_ci.txt
