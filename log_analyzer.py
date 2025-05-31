@@ -48,21 +48,36 @@ def ecrire_rapport(compteurs: dict, fichier_rapport: str):
 
 def main():
     """
-    Point d'entrée du script. Usage : python log_analyzer.py [chemin_vers_log.txt]
+    Point d'entrée du script. Usage :
+        python log_analyzer.py [chemin_vers_log.txt] [nom_du_rapport.txt]
+
+    - Si aucun argument n’est fourni, on utilise "log.txt" pour le fichier de log
+      et "rapport.txt" pour le rapport.
+    - Si un seul argument est fourni, on l’utilise comme fichier de log, et le
+      nom de rapport reste "rapport.txt".
+    - Si deux arguments sont fournis, le second est utilisé comme nom de fichier
+      pour le rapport (ex. : "mon_rapport.txt").
     """
-    # Si aucun argument, on suppose que le fichier s'appelle log.txt dans le dossier courant
+    # Récupération du nom du fichier de log (1er argument) ou valeur par défaut
     if len(sys.argv) >= 2:
         fichier_log = sys.argv[1]
     else:
         fichier_log = "log.txt"
+
+    # Récupération du nom de sortie pour le rapport (2e argument) ou valeur par défaut
+    if len(sys.argv) >= 3:
+        nom_rapport = sys.argv[2]
+    else:
+        nom_rapport = "rapport.txt"
 
     if not os.path.isfile(fichier_log):
         print(f"Le fichier de log spécifié ({fichier_log}) n'existe pas.", file=sys.stderr)
         sys.exit(1)
 
     compteurs = analyser_log(fichier_log)
-    ecrire_rapport(compteurs, "rapport.txt")
-    # On pourra éventuellement afficher aussi les stats à l’écran :
+    ecrire_rapport(compteurs, nom_rapport)
+
+    # Affichage console des statistiques
     print("=== Statistiques (affichage console) ===")
     print(f"ERROR   : {compteurs['ERROR']}")
     print(f"WARNING : {compteurs['WARNING']}")
