@@ -1,6 +1,6 @@
 # Log Analyzer CLI
 
-**Auteur :** Votre Prénom Nom  
+**Auteur :** Ait Messkine Mohamed
 **Date :** 31/05/2025  
 
 ## Description
