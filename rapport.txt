@@ -1,0 +1,4 @@
+=== Rapport d'analyse des logs ===
+Nombre de lignes ERROR   : 2
+Nombre de lignes WARNING : 1
+Nombre de lignes INFO    : 3

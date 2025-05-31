@@ -1,0 +1,6 @@
+2025-05-31 10:00:01 INFO  Démarrage du service
+2025-05-31 10:00:05 WARNING Mémoire faible détectée
+2025-05-31 10:00:10 ERROR Impossible de se connecter à la base
+2025-05-31 10:01:00 INFO  Traitement des requêtes
+2025-05-31 10:02:45 ERROR Erreur critique lors du traitement
+2025-05-31 10:03:00 INFO  Service arrêté
