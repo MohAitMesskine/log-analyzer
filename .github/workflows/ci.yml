@@ -1,0 +1,50 @@
+name: CI Log Analyzer
+
+# Déclenchement du pipeline à chaque push (ou pull_request) sur branches main et dev
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-log-analyzer:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout du code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Mise en place de Python 3
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # 3. Installation (ici, aucun package supplémentaire)
+      - name: Install dependencies
+        run: |
+          python3 --version
+
+      # 4. Exécution du script sur un fichier de test
+      - name: Exécuter log_analyzer.py
+        run: |
+          # On simule un log.txt minimal si absent
+          if [ ! -f log.txt ]; then
+            echo "2025-05-31 12:00:00 INFO  Test CI" > log.txt
+            echo "2025-05-31 12:00:01 ERROR Test CI" >> log.txt
+          fi
+          python3 log_analyzer.py log.txt rapport_ci.txt
+          echo "=== Affichage du rapport généré CI ==="
+          cat rapport_ci.txt
+
+      # 5. Optionnel : publier le rapport en artefact GitHub Actions
+      - name: Upload rapport en artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: rapport-logs
+          path: rapport_ci.txt
